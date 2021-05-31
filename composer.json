@@ -1,0 +1,13 @@
+{
+    "name": "andsaru/php-1-exercices",
+    "authors": [
+        {
+            "name": "andsaru",
+            "email": "andsaru@hotmail.es"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
