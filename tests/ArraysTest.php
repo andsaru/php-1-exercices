@@ -1,19 +1,25 @@
 <?php 
 
+// Habilita el modo esctricto
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertEquals;
 
 final class ArraysTest extends TestCase
 {
-    // public function testArrayIndexado1(): void
-    // {
-    //     // Consigue la frase esperada utilizando índices del array y concatenación
-    //     $seasons = ["Primavera", "Verano", "Otoño,", "Invierno"]; 
-    //     $phrase = '';
+    public function testArrayIndexado1(): void
+    {
+        // Consigue la frase esperada utilizando índices del array y concatenación
+        $seasons = ["Primavera", "Verano", "Otoño,", "Invierno"]; 
+        $phrase = "La estación que más me gusta es el $seasons[1] y la que menos es el $seasons[3]";
+        // $phrase = 'La estación que más me gusta es el '.$seasons[1].' y la que menos es el '.$seasons[3].;
         
-    //     $expectedPhrase = "La estación que más me gusta es el verano y la que menos es el invierno";
-    //     assertEquals($expectedPhrase, $phrase);
-    // }
+        $expectedPhrase = "La estación que más me gusta es el Verano y la que menos es el Invierno";
+        // assertEquals, compara la frse de $expectedPhrase con $phrase, y devuelve si son iguales o no 
+        assertEquals($expectedPhrase, $phrase);
+    }
+
 
     // public function testArrayAsociativo(): void
     // {
