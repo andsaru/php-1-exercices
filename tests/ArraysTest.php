@@ -21,14 +21,14 @@ final class ArraysTest extends TestCase
     }
 
 
-    // public function testArrayAsociativo(): void
-    // {
-    //     // Consigue el email del usuario utilizando la clave del array
-    //     $user = ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena']; 
-    //     $userEmail = '';
+    public function testArrayAsociativo(): void
+    {
+        // Consigue el email del usuario utilizando la clave del array
+        $user = ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena']; 
+        $userEmail = $user['email'];
 
-    //     assertEquals('carlos@correo.com', $userEmail);
-    // }
+        assertEquals('carlos@correo.com', $userEmail);
+    }
 
     // public function testArrayMultidimensional(): void
     // {
