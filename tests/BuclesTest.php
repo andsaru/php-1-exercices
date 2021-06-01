@@ -100,7 +100,7 @@ final class BuclesTest extends TestCase
 
       foreach ($users as $user) {
         //$emails[] = $user['email']; 
-        array_push($emails, $user['email'], $user['city']);
+        array_push($emails, $user['email'], $user['city']); // para imprimir varios elementos array_push
       }
 
       // var_dump($emails) ; // para imprimir array utilizar var_dump
@@ -110,22 +110,41 @@ final class BuclesTest extends TestCase
       assertEquals(['carlos@correo.com','carmen@correo.com','carmelo@correo.com','carolina@correo.com'], $emails);
     }
 
-    // public function testEjercicio2(): void
-    // {
-    //   $employees = [
-    //     ['name' => 'Carlos', 'email' => 'carlos@miempresa.net', 'city' => 'Benalmádena'],
-    //     ['name' => 'Carmen', 'email' => 'carmen@miempresa.net', 'city' => 'Fuengirola'],
-    //     ['name' => 'Carmelo', 'email' => 'carmelo@miempresa.net', 'city' => 'Torremolinos'],
-    //     ['name' => 'Carolina', 'email' => 'carolina@miempresa.net', 'city' => 'Málaga'],
-    //   ]; 
+    public function testEjercicio2(): void
+    {
+      $employees = [
+        ['name' => 'Carlos', 'email' => 'carlos@miempresa.net', 'city' => 'Benalmádena'],
+        ['name' => 'Carmen', 'email' => 'carmen@miempresa.net', 'city' => 'Fuengirola'],
+        ['name' => 'Carmelo', 'email' => 'carmelo@miempresa.net', 'city' => 'Torremolinos'],
+        ['name' => 'Carolina', 'email' => 'carolina@miempresa.net', 'city' => 'Málaga'],
+      ]; 
+   
+      // La empresa va a cambiar el dominio de los correos de miempresa.net a miempresa.com
+      // Imáginate que en total son 1500 empleados...
+      // Cambiar los correos de todos los empleados mediante un bucle foreach
+      // Pista: 
+      //   assertEquals(['carlos', 'miempresa.net'], explode("@", 'carlos@miempresa.net'))
       
-    //   // La empresa va a cambiar el dominio de los correos de miempresa.net a miempresa.com
-    //   // Imáginate que en total son 1500 empleados...
-    //   // Cambiar los correos de todos los empleados mediante un bucle foreach
-    //   // Pista: 
-    //   //   assertEquals(['carlos', 'miempresa.net'], explode("@", 'carlos@miempresa.net'))
+      // SOLUCIÓN con str_replace, ponemos el & delante $employee para pasarlo por referencia
+      foreach ($employees as $clave => &$employee) {
+          $employees[$clave]['email'] = str_replace('.net', '.com', $employee['email']);
+      }
+        // 0,1,2 y 3 serían $key o $clave 
+        // 0. $user =  ['name' => 'Carlos', 'email' => 'carlos@miempresa.net', 'city' => 'Benalmádena'],
+        // 1. $user =  ['name' => 'Carmen', 'email' => 'carmen@miempresa.net', 'city' => 'Fuengirola'],
+        // 2. $user =  ['name' => 'Carmelo', 'email' => 'carmelo@miempresa.net', 'city' => 'Torremolinos'],
+        // 3. $user =  ['name' => 'Carolina', 'email' => 'carolina@miempresa.net', 'city' => 'Málaga'],
 
-    //   assertEquals('carlos@miempresa.com', $employees[0]['email']);
-    //   assertEquals('carolina@miempresa.com', $employees[3]['email']);
-    // }
+      // SOLUCIÓN en modo javascript con explode  
+      // foreach ($employees as $key => $employee) {
+
+      //   $identify = explode(".", $employee['email']);
+
+      //   $employees[$key]['email'] = $identify[0].'.com';
+
+      // }
+
+      assertEquals('carlos@miempresa.com', $employees[0]['email']);
+      assertEquals('carolina@miempresa.com', $employees[3]['email']);
+    }
 }
