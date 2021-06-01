@@ -1,5 +1,16 @@
-<?php
+<?php 
 
+// Expresiones alternativas
+
+// if(true) :
+//   echo 'hola';
+// endif;
+
+// Esta se seuele utilizar más
+
+/* <?php if(true) : ?> 
+//   echo 'hola';
+// <? endif; ?> */
 
 if ($coder) {
   $resultado = "Eres Coder!";

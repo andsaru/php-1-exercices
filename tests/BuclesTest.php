@@ -53,6 +53,11 @@ final class BuclesTest extends TestCase
       ]; 
       $emails = [];
       
+      // foreach ($users as $key => $user) {
+      //   if ($user['email'] === 'carmen@correo.com'){
+      //     continue;
+      //   }
+      //   $emails[] = $key.$user['email']; }
       foreach ($users as $user) {
         $emails[] = $user['email']; // Add email to the end of the array
       }
@@ -62,11 +67,18 @@ final class BuclesTest extends TestCase
 
     public function testForeachKeyValue(): void
     {
-      $user = ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena'];
+      $user = [
+        'name' => 'Carlos', 
+        'email' => 'carlos@correo.com', 
+        'city' => 'Benalmádena'
+      ];
       $arrayOfKeys = [];
       $arrayOfValues = [];
       
       foreach ($user as $key => $value) {
+        // 1a iteración 'name' => 'Carlos'
+        // 2a iteración 'email' => 'carlos@correo.com', 
+        // 3a iteración 'city' => 'Benalmádena'
         $arrayOfKeys[] = $key;
         $arrayOfValues[] = $value;
       }
@@ -75,20 +87,28 @@ final class BuclesTest extends TestCase
       assertEquals(['Carlos','carlos@correo.com','Benalmádena'], $arrayOfValues);
     }
 
-    // public function testEjercicio1(): void
-    // {
-    //   $users = [
-    //     ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena'],
-    //     ['name' => 'Carmen', 'email' => 'carmen@correo.com', 'city' => 'Fuengirola'],
-    //     ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'city' => 'Torremolinos'],
-    //     ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'city' => 'Málaga'],
-    //   ]; 
-    //   $emails = [];
-      
-    //   // Conseguir un array con los correos de los usuarios utilizando foreach
+    public function testEjercicio1(): void
+    {
+      $users = [
+        ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena'],
+        ['name' => 'Carmen', 'email' => 'carmen@correo.com', 'city' => 'Fuengirola'],
+        ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'city' => 'Torremolinos'],
+        ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'city' => 'Málaga'],
+      ]; 
 
-    //   assertEquals(['carlos@correo.com','carmen@correo.com','carmelo@correo.com','carolina@correo.com'], $emails);
-    // }
+      $emails = [];
+
+      foreach ($users as $user) {
+        //$emails[] = $user['email']; 
+        array_push($emails, $user['email'], $user['city']);
+      }
+
+      // var_dump($emails) ; // para imprimir array utilizar var_dump
+
+      // Conseguir un array con los correos de los usuarios utilizando foreach (SOLUCIÓN, Foreach de arriba)
+
+      assertEquals(['carlos@correo.com','carmen@correo.com','carmelo@correo.com','carolina@correo.com'], $emails);
+    }
 
     // public function testEjercicio2(): void
     // {
