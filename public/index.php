@@ -8,6 +8,10 @@
 </head>
 
 <body>
+    <?php
+        include("./link.php") // include para añadir el enlace que está en link.php
+    ?>
+
     <?php $weekDays = [
         1 => 'lunes',
         2 => 'martes',
@@ -19,7 +23,20 @@
     ];
     ?>
 
-    <h1>Hola, Andrés</h1>
+    <?php
+       // var_dump($_GET); // para verlo solo por pantalla
+    ?>
+
+    <!-- <pre>
+        &_GET: <?php var_dump($_GET); ?>
+        <br/>
+        &_POST: <?php //print_r($_POST); ?>
+        <br/>
+        &_SERVER: <?php //print_r($_SERVER; ?>
+        <br/>
+    </pre> -->
+
+    <h1>Hola, <?= $_GET['token']; ?></h1>
     <p>Hoy es <strong><?= $weekDays[date('N')]; ?></strong> ,¿Qué tal estás?</p>
 </body>
 </html>

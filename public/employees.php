@@ -18,6 +18,11 @@ $people = [
   <title>Document</title>
 </head>
 <body>
+  
+    <?php
+        include("./link.php") // include para añadir el enlace que está en link.php
+    ?>
+
     <table>
       <thead>
         <tr>
@@ -27,15 +32,18 @@ $people = [
           <td>Ciudad</td>
         </tr>
       </thead>
-    </table>
-
+   
     <tbody>
+    <?php foreach($people as $person) : ?>
         <tr>
-          <td>Andrés</td>
-          <td>andres@gmailcom</td>
-          <td>32</td>
-          <td>Málaga</td>
+          <td><?php echo $person['name']; ?> </td>
+          <td><?php echo $person['email']; ?></td>
+          <td><?php echo $person['age']; ?></td>
+          <td><?php echo $person['city']; ?></td>
         </tr>
+    <?php endforeach; ?>
     </tbody>
+
+    </table>
 </body>
 </html>
