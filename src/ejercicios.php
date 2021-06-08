@@ -97,5 +97,48 @@ function averageAge(array $people) {
 // -----------------------------------
 
 // Ejercicio ReverseTest Opción 1
+function reverseString(string $string): string { // $string = Hola qué tal
+    $chars = mb_str_split($string); // función multibyte que separa la cadena en caracter
+                                    // $chars = ['H', 'o', 'l', 'a', ' ', 'q', 'u', 'é', ' ', 't', 'a', 'l']
+                                    // y luego lo vuelve a juntar dandole la vuelta
+    return implode('', array_reverse($chars));
+}
 
+// function reverseWords($sentence) {
+//     $words = explode(" ", $sentence);
+//     $reverseWords = array_reverse($words);
+//     $reverseString = implode(" ", $reverseWords);
+//     return $reverseString;
+// }
 
+// function reverseWords(string $sentence): string {
+//   $stringReverse = "";
+//   $sentence = explode(" ", $sentence); // -> array ['hola', 'que', 'tal']
+//   var_dump($sentence); // Depuramos
+//   $sentence = array_reverse($sentence); // ->girar array ['tal', 'que', 'hola']
+//   foreach($sentence as $word) { // recorre el array
+//     $stringReverse .= ($word);
+//   }
+//   return $stringReverse;
+// }
+
+// Opción profesor 
+function reverseWords (string $string): string {
+    $words = explode(' ', $string);
+
+    return implode(' ', array_reverse($words));
+}
+
+function reverseCharactersInWords(string $string):string {
+    $words = explode(' ', $string);
+
+    $turnWords = [];
+
+    foreach($words as $word) {
+        $turnWords [] = reverseString($word); // utilizo la función primera, que ya gira las palabras
+    }
+
+    return implode(' ', $turnWords);
+}
+
+// -----------------------------------
