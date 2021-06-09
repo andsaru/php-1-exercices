@@ -8,13 +8,21 @@
 
     $query = 'SELECT * FROM employees';
     if (isset($_GET['id'])) {
-        $query = 'SELECT * FROM employees WHERE id='.$_GET['id'];
+        $query = 'SELECT * FROM employees WHERE id= :identificador';
     }elseif (isset($_GET['email'])) {
-        $query = 'SELECT * FROM employees WHERE email= "'.$_GET['email'].'"';
+        $query = 'SELECT * FROM employees WHERE email= :correo';
     }
 
-    // Hago una consulta a la base de datos para que me devuelva todo
-    $stm = $dbConnexion->query($query);
+    // Hago una consulta a la base de datos con prepare para evitar ataques de inyección sql
+    $stm = $dbConnexion->prepare($query);
+    // Con prepare se le añade un parametro :identificador y se le da su valor.
+    if (isset($_GET['id'])) {
+        $stm->bindParam(':identificador', $_GET['id']);
+    }elseif (isset($_GET['email'])) {
+        $stm->bindParam(':correo', $_GET['email']);
+    }
+    // necesita ejecutarlo 
+    $stm->execute();
     // Devuelve un array que contiene todas las filas del conjunto de resultados fetchAll
     $people = $stm->fetchAll(PDO::FETCH_ASSOC);
 
