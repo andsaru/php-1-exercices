@@ -4,12 +4,19 @@
     // Quiero evaluar si me llega el id por el query a través de URL, con el metodo isset
     // Si me llega el id, monto una consulta que incluye ese criterio
     // Y sino saca la entera de empleados
-    $query= (isset($_GET['id'])) ? 'SELECT * FROM employees WHERE id='.$_GET['id'] : 'SELECT * FROM employees';
+    //$query= (isset($_GET['id'])) ? 'SELECT * FROM employees WHERE id='.$_GET['id'] : 'SELECT * FROM employees';
+
+    $query = 'SELECT * FROM employees';
+    if (isset($_GET['id'])) {
+        $query = 'SELECT * FROM employees WHERE id='.$_GET['id'];
+    }elseif (isset($_GET['email'])) {
+        $query = 'SELECT * FROM employees WHERE email= "'.$_GET['email'].'"';
+    }
+
     // Hago una consulta a la base de datos para que me devuelva todo
     $stm = $dbConnexion->query($query);
     // Devuelve un array que contiene todas las filas del conjunto de resultados fetchAll
     $people = $stm->fetchAll(PDO::FETCH_ASSOC);
-
 
 ?>
  <?php
