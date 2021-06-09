@@ -1,33 +1,29 @@
-<?php
-// Conexión a la base de datos de mysql
-$dbUser = 'root';
-$dbPassword = 'Andres2021';
-$dbHost = 'localhost';
-$dbDatabase = 'employees';
+<?php 
 
-try {
-    $dbConnexion = new PDO("mysql:host=${dbHost};dbname=${dbDatabase}", $dbUser, $dbPassword);
-    // Cojo el atributo de PDO::ATTR_ERRMODE y elijo el valor PDO::ERRMODE_EXCEPTION
-    // que esta dentro de PDO::ATTR_ERRMODE
-    $dbConnexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // catch es una estructura de control de flujo, que siempre recibe una excepción
-} catch (PDOException $e) {
-    echo 'Error en la conexión a la base de datos: ' . $e->getMessage();
-}
+    require $_SERVER['DOCUMENT_ROOT'] . '/lib/app.php'; 
+    // Quiero evaluar si me llega el id por el query a través de URL, con el metodo isset
+    // Si me llega el id, monto una consulta que incluye ese criterio
+    // Y sino saca la entera de empleados
+    $query= (isset($_GET['id'])) ? 'SELECT * FROM employees WHERE id='.$_GET['id'] : 'SELECT * FROM employees';
+    // Hago una consulta a la base de datos para que me devuelva todo
+    $stm = $dbConnexion->query($query);
+    // Devuelve un array que contiene todas las filas del conjunto de resultados fetchAll
+    $people = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-var_dump($dbConnexion);
 
 ?>
-<?php
+ <?php
+//  Tras realizar $people = $stm->fetchAll(PDO::FETCH_ASSOC);, 
+//  Toda la tabla de abajo ya no nos hace falta 
 
-$people = [
-    ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'age' => 20, 'city' => 'Benalmádena'],
-    ['name' => 'Mari Carmen', 'email' => 'carmen@correo.com', 'age' => 15, 'city' => 'Fuengirola'],
-    ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'age' => 17, 'city' => 'Torremolinos'],
-    ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'age' => 18, 'city' => 'Málaga'],
-];
-
+//  people = [
+//     ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'age' => 20, 'city' => 'Benalmádena'],
+//     ['name' => 'Mari Carmen', 'email' => 'carmen@correo.com', 'age' => 15, 'city' => 'Fuengirola'],
+//     ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'age' => 17, 'city' => 'Torremolinos'],
+//     ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'age' => 18, 'city' => 'Málaga'],
+// ];  
 ?>
+
 <?php
 
 require $_SERVER['DOCUMENT_ROOT'] . '/employees_'.(isset($_GET['format']) && in_array($_GET['format'], ['json', 'xml']) ? $_GET['format'] : 'html').'.php';

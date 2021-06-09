@@ -1,3 +1,2 @@
 <?php header('Content-Type: application/json'); ?>
-<?= json_encode($people); ?>
-
+<?= json_encode($people); 
