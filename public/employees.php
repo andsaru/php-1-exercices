@@ -4,8 +4,8 @@
     // Quiero evaluar si me llega el id por el query a través de URL, con el metodo isset
     // Si me llega el id, monto una consulta que incluye ese criterio
     // Y sino saca la entera de empleados
-    //$query= (isset($_GET['id'])) ? 'SELECT * FROM employees WHERE id='.$_GET['id'] : 'SELECT * FROM employees';
-
+    // $query= (isset($_GET['id'])) ? 'SELECT * FROM employees WHERE id='.$_GET['id'] : 'SELECT * FROM employees';
+    // Esta query es para el listado
     $query = 'SELECT * FROM employees';
     if (isset($_GET['id'])) {
         $query = 'SELECT * FROM employees WHERE id= :identificador';

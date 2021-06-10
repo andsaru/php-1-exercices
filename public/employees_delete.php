@@ -17,7 +17,7 @@ $result = $stm->rowCount();
 // Respuesta a la solicitd del cliente
 $response = [
     'status' => $result === 0 ? 'error' : 'success',
-    'message' => $result === 0 ? 'No hemos eliminado a nadie' : 'He elimado '.$result.' fila',
+    'message' => $result === 0 ? 'No hemos eliminado a nadie' : 'He eliminado '.$result.' fila',
 ];
 
 

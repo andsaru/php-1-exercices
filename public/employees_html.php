@@ -20,6 +20,7 @@
             </tr>
         </thead>
         <tbody>
+        <?php //se recorre y pinta la lista preparada en employeees.php?>
             <?php foreach($people as $person): ?>
                 <tr>
                     <td><a href="/employees.php?id=<?= $person['id'] ?>"><?= $person['id'] ?></a></td>
@@ -37,19 +38,40 @@
     </table>
 
     <hr/>
+    
+    <?php
+    // Esta query es para el formulario, para poder cambiar la base de datos
+    if (isset($_GET['id'])) {
+        $query = 'SELECT * FROM employees WHERE id= :identificador';
+        $stm = $dbConnexion->prepare($query);
+        $stm->bindParam(':identificador', $_GET['id']);
+        $stm->execute();
+        $currentPerson = $stm->fetch(PDO::FETCH_ASSOC);
+    }elseif (isset($_GET['email'])) {
+        $query = 'SELECT * FROM employees WHERE email= :correo';
+        $stm = $dbConnexion->prepare($query);
+        $stm->bindParam(':correo', $_GET['email']);
+        $stm->execute();
+        $currentPerson = $stm->fetch(PDO::FETCH_ASSOC);
+    }
+    ?>
+
     <!-- multipart form data para cuando añadimos un fichero -->
     <form method="POST" action="/employees_add.php" enctype= "multipart/form-data"> 
+        <?php if(isset($currentPerson)): ?>
+            <input type="hidden" id="id" name="id" value="<?= $currentPerson['id']; ?>"/>
+        <?php endif; ?>
         <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" required/>
+        <input type="text" id="name" name="name" value="<?= $currentPerson['name'] ?>" required/>
     <br/>
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required/>
+        <input type="email" id="email" name="email" value="<?= $currentPerson['email'] ?>" required/>
     <br/>
         <label for="age">Edad</label>
-        <input type="number" id="age" name="age" required/>
+        <input type="number" id="age" name="age" value="<?= $currentPerson['age'] ?>" required/>
     <br/>
         <label for="city">Ciudad</label>
-        <input type="text" id="city" name="city" />
+        <input type="text" id="city" name="city" value="<?= $currentPerson['city'] ?>"/>
     <br/>
         <label for="archivo">Archivo</label>
         <input type="file" id="archivo" name="archivo" />
