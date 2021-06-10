@@ -4,6 +4,12 @@
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/partial/header.php'; ?>
+
+    <?php if(isset($_GET['message'])) :?>
+        <p><?= $_GET['message']; ?></p>
+    <?php endif; ?>
+
+    <hr/>                 
     <table border="1">
         <thead>
             <tr>
@@ -24,16 +30,11 @@
                     <td><a href="/employees.php?email=<?= $person['email'] ?>"><?= $person['email'] ?></a></td>
                     <td><?= $person['city'] ?></td>
                      <!-- Tiene que ser en comillas simples ' json_encode($person); ' no es un atributo-->
-                    <td><button class="employees-delete-button" value="Eliminar" data-person='<?= json_encode($person); ?>'>Eliminar</button</td>
+                     <td><button class="employees-delete-button" value="Eliminar" data-person='<?= json_encode($person); ?>'>Eliminar</button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    
-    <?php if(isset($_GET['message'])) :?>
-        <p><?= $_GET['message']; ?></p>
-    <?php endif; ?>
-                 
 
     <hr/>
     <!-- multipart form data para cuando añadimos un fichero -->
