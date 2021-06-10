@@ -23,6 +23,7 @@
                     // así creo un enlace único para cada uno de los usuarios -->
                     <td><a href="/employees.php?email=<?= $person['email'] ?>"><?= $person['email'] ?></a></td>
                     <td><?= $person['city'] ?></td>
+                     <!-- Tiene que ser en comillas simples ' json_encode($person); ' no es un atributo-->
                     <td><button class="employees-delete-button" value="Eliminar" data-person='<?= json_encode($person); ?>'>Eliminar</button</td>
                 </tr>
             <?php endforeach; ?>
