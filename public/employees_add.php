@@ -1,8 +1,4 @@
-
 <?php
-
-var_dump($_POST);
-var_dump($_FILES);
 
 require $_SERVER['DOCUMENT_ROOT']. '/lib/app.php';
 
